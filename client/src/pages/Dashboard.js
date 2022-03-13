@@ -38,8 +38,6 @@ const Dashboard = () => {
         getGenderedUsers()
     }, [user, genderedUsers])
 
-    console.log(genderedUsers)
-
     const updateMatches = async (matchedUserId) => {
         try {
             await axios.put('http://localhost:8000/addmatch', {
@@ -51,8 +49,6 @@ const Dashboard = () => {
             console.log(error)
         }
     }
-
-    console.log(user)
 
     const swiped = (direction, swipedUserId) => {
         if (direction === 'right') {
@@ -69,7 +65,7 @@ const Dashboard = () => {
     const matchedUserIds = user?.matches.map(({user_id}) => user_id).concat(userId)
 
     const filteredGenderedUsers = genderedUsers?.filter(
-        genderedUsers => !matchedUserIds.includes(genderedUsers.user_id)
+        genderedUser => !matchedUserIds.includes(genderedUser.user_id)
     )
 
     return (<>
