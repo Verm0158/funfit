@@ -70,7 +70,7 @@ app.post('/login', async (req, res) => {
             const token = jwt.sign(user, email, {
                 expiresIn: 60 * 24
             })
-            res.status(201).json({token, userId: user.user_id })
+            res.status(201).json({token, userId: user.user_id})
         }
         res.status(400).send('Invalid Credentials')
     } catch (err) {
@@ -117,7 +117,7 @@ app.get('/gendered-users', async (req, res) => {
         await client.connect()
         const database = client.db('app-data')
         const users = database.collection('users')
-        const query = { gender_identity: { $eq : gender}}
+        const query = {gender_identity: {$eq: gender}}
         const foundUsers = await users.find(query).toArray()
 
         res.send(foundUsers)
@@ -135,7 +135,7 @@ app.get('/user', async (req, res) => {
         const database = client.db('app-data')
         const users = database.collection('users')
 
-        const query = { user_id: userId}
+        const query = {user_id: userId}
         const user = await users.findOne(query)
         res.send(user)
     } finally {
@@ -143,7 +143,7 @@ app.get('/user', async (req, res) => {
     }
 })
 
-app.put('/user', async ( req, res ) => {
+app.put('/user', async (req, res) => {
     const client = new MongoClient(uri)
     const formData = req.body.formData
 
@@ -152,7 +152,7 @@ app.put('/user', async ( req, res ) => {
         const database = client.db('app-data')
         const users = database.collection('users')
 
-        const query = { user_id: formData.user_id }
+        const query = {user_id: formData.user_id}
         const updateDocument = {
             $set: {
                 first_name: formData.first_name,
@@ -177,19 +177,39 @@ app.put('/user', async ( req, res ) => {
 
 app.put('/addmatch', async (req, res) => {
     const client = new MongoClient(uri)
-    const { userId, matchedUserId } = req.body
+    const {userId, matchedUserId} = req.body
 
     try {
         await client.connect()
         const database = client.db('app-data')
         const users = database.collection('users')
 
-        const query = { user_id: userId }
+        const query = {user_id: userId}
         const updateDocument = {
-            $push: { matches: {user_id: matchedUserId }},
+            $push: {matches: {user_id: matchedUserId}},
         }
         const user = await users.updateOne(query, updateDocument)
         res.send(user)
+    } finally {
+        await client.close()
+    }
+})
+
+app.get('/messages', async (req, res) => {
+    const client = new MongoClient(uri)
+    const {userId, correspondingUserId} = req.query
+    console.log(userId, correspondingUserId)
+
+    try {
+        await client.connect()
+        const database = client.db('app-data')
+        const messages = database.collection('messages')
+
+        const query = {
+            from_userId: userId, to_userId: correspondingUserId
+        }
+        const foundMessages = await messages.find(query).toArray()
+        res.send(foundMessages)
     } finally {
         await client.close()
     }
