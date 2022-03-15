@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import Nav from '../components/Nav';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import {useCookies} from 'react-cookie';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const OnBoarding = () => {
@@ -23,10 +23,9 @@ const OnBoarding = () => {
     let navigate = useNavigate()
 
     const handleSubmit = async (e) => {
-        console.log('Submitted')
         e.preventDefault()
         try {
-            const response = await axios.put('http://localhost:8000/user', { formData })
+            const response = await axios.put('http://localhost:8000/user', {formData})
             const success = response.status === 200
             if (success) navigate('/dashboard')
         } catch (err) {
@@ -35,18 +34,14 @@ const OnBoarding = () => {
     }
 
     const handleChange = (e) => {
-        console.log('e', e)
         const value = e.target.type === 'checkbox' ? e.target.checkbox : e.target.value
         const name = e.target.name
-        console.log('value' + value, 'name' + name)
 
         setFormData((prevState) => ({
             ...prevState,
-            [name] : value
+            [name]: value
         }))
     }
-
-    console.log(formData)
 
     return (
         <>
@@ -176,13 +171,13 @@ const OnBoarding = () => {
                             <label htmlFor="everyone-gender-interest">Everyone</label>
                         </div>
 
-                        <label htmlFor="about">About me</label>
+                        <label htmlFor="about">Sport</label>
                         <input
                             id="about"
                             type="text"
                             name="about"
                             required={true}
-                            placeholder="I like long walks.."
+                            placeholder="Athletics, weightlifting.."
                             value={formData.about}
                             onChange={handleChange}
                         />

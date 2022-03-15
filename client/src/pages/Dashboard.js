@@ -35,8 +35,13 @@ const Dashboard = () => {
 
     useEffect(() => {
         getUser()
-        getGenderedUsers()
-    }, [user, genderedUsers])
+    }, [])
+
+    useEffect(() => {
+        if (user) {
+            getGenderedUsers()
+        }
+    }, [user])
 
     const updateMatches = async (matchedUserId) => {
         try {
@@ -74,14 +79,14 @@ const Dashboard = () => {
             <div className="swipe-container">
                 <div className="card-container">
 
-                    {filteredGenderedUsers?.map((genderedUsers) =>
+                    {filteredGenderedUsers?.map((genderedUser) =>
                         <TinderCard
                             className='swipe'
-                            key={genderedUsers.first_name}
-                            onSwipe={(dir) => swiped(dir, genderedUsers.user_id)}
-                            onCardLeftScreen={() => outOfFrame(genderedUsers.first_name)}>
-                            <div style={{backgroundImage: 'url(' + genderedUsers.url + ')'}} className='card'>
-                                <h3>{genderedUsers.first_name}</h3>
+                            key={genderedUser.user_id}
+                            onSwipe={(dir) => swiped(dir, genderedUser.user_id)}
+                            onCardLeftScreen={() => outOfFrame(genderedUser.first_name)}>
+                            <div style={{backgroundImage: 'url(' + genderedUser.url + ')'}} className='card'>
+                                <h3>{'Name: ' + genderedUser.first_name} <br/> {'Sport: ' + genderedUser.about}</h3>
                             </div>
                         </TinderCard>)}
                     <div className="swipe-info">

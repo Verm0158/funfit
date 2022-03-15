@@ -5,7 +5,9 @@ const {v1: uuidv4} = require('uuid')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 const bcrypt = require('bcrypt')
-const uri = 'mongodb+srv://paardje:>boO72H.@cluster0.mawok.mongodb.net/Cluster0?retryWrites=true&w=majority'
+require('dotenv').config()
+
+const uri = process.env.URI
 
 const app = express()
 app.use(cors())
@@ -50,6 +52,8 @@ app.post('/signup', async (req, res) => {
         res.status(201).json({token, userId: generateUserId})
     } catch (err) {
         console.log(err)
+    } finally {
+        await client.close()
     }
 })
 
@@ -75,6 +79,8 @@ app.post('/login', async (req, res) => {
         res.status(400).send('Invalid Credentials')
     } catch (err) {
         console.log(err)
+    } finally {
+        await client.close()
     }
 })
 
