@@ -131,6 +131,12 @@ nav .logo-container .logo {
     font-size: 17px;
 }
 
+/*----- About -----*/
+.about p{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 /*----- OnBoarding Page -----*/
 
 .onboarding {
@@ -254,9 +260,21 @@ nav .logo-container .logo {
 
 .dashboard .swipe-info {
     position: absolute;
-    bottom: 0;
+    top: 0;
     padding: 10px;
+    margin-left: 120px;
 }
+
+.swipe-button-left {
+    position: absolute;
+    bottom: 50px;
+}
+.swipe-button-right {
+    position: absolute;
+    bottom: 50px;
+    margin-left: 250px;
+}
+
 
 /*----- Chat Container -----*/
 

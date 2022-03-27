@@ -56,6 +56,7 @@ const Dashboard = () => {
     }
 
     const swiped = (direction, swipedUserId) => {
+        console.log(direction, swipedUserId)
         if (direction === 'right') {
             updateMatches(swipedUserId)
         }
@@ -89,10 +90,19 @@ const Dashboard = () => {
                                 <h3>{'Name: ' + genderedUser.first_name} <br/> {'Sport: ' + genderedUser.about}</h3>
                             </div>
                         </TinderCard>)}
+                    <div className="swipe-button-left">
+                        <button className="primary-button"
+                                onClick={() => swiped('left')}>Swipe left!
+                        </button>
+                    </div>
+                    <div className="swipe-button-right">
+                        <button className="primary-button"
+                                onClick={() => swiped('right')}>Swipe right!
+                        </button>
+                    </div>
                     <div className="swipe-info">
                         {lastDirection ? <p>You swiped {lastDirection}</p> : <p/>}
                     </div>
-
                 </div>
             </div>
         </div>}

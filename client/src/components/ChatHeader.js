@@ -7,6 +7,7 @@ const ChatHeader = ({user}) => {
         removeCookie('UserId', cookies.UserId)
         removeCookie('AuthToken', cookies.AuthToken)
         window.location.reload()
+
     }
 
 

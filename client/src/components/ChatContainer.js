@@ -13,6 +13,7 @@ const ChatContainer = ({user}) => {
             <div>
                 <button className="option" onClick={() => setClickedUser(null)}>Matches</button>
                 <button className="option" disabled={!clickedUser}>Chat</button>
+                <button className="option" >Prices</button>
             </div>
 
             {!clickedUser && <MatchesDisplay matches={user.matches} setClickedUser={setClickedUser}/>}
