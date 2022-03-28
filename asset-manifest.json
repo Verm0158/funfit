@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/funfit/static/css/main.222996fa.css",
+    "main.js": "/funfit/static/js/main.ffb07ab7.js",
+    "static/media/background.jpg": "/funfit/static/media/background.427e682b18104ec4cd11.jpg",
+    "static/media/color-logo-funfit.png": "/funfit/static/media/color-logo-funfit.ea98bf434a427551cef6.png",
+    "index.html": "/funfit/index.html",
+    "main.222996fa.css.map": "/funfit/static/css/main.222996fa.css.map",
+    "main.ffb07ab7.js.map": "/funfit/static/js/main.ffb07ab7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.222996fa.css",
+    "static/js/main.ffb07ab7.js"
+  ]
+}
